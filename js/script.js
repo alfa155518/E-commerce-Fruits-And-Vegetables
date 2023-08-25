@@ -1,3 +1,21 @@
+// Make Line Scroller 
+let lineScroller = document.querySelector('.scroller')
+
+let documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+
+window.addEventListener("scroll", e => {
+  let documentScrollTop = document.documentElement.scrollTop;
+
+  lineScroller.style.width = `${(documentScrollTop / documentHeight) * 100}%`
+
+})
+
+
+
+
+
+
 // Arrow Scroll To Top
 let scrollTop = document.querySelector(".scroll-top");
 
@@ -30,6 +48,40 @@ let imgProduct = document.querySelectorAll(".all-products .item .img-empty");
 
 let imgsProduct = document.querySelectorAll(".all-products .item .images img");
 
+let imgsProductLazyLoad = document.querySelectorAll(".all-products .item img");
+
+
+let serviceSection = document.querySelector(".service")
+
+let serviceItemNum = document.querySelectorAll(".service .item span p")
+
+let started = false;
+
+window.onscroll = function() {
+    if (window.scrollY >= serviceSection.offsetTop) {
+        if (!started) {
+            serviceItemNum.forEach(num => count(num))
+            
+        }
+        started = true;
+    }
+  }
+
+
+function count(el) {
+  let goal = el.dataset.number;
+let interval = setInterval(() => {
+  el.textContent++;
+  if (el.textContent === goal) {
+      clearInterval(interval)
+  }    
+}, 1000 / goal);    
+};    
+
+
+
+
+
 // function change image Product
 imgsProduct.forEach((img) => {
   img.addEventListener("click", (e) => {
@@ -59,6 +111,32 @@ function doAll(e) {
     item.style.display = "block";
   });
 }
+
+// Lazy Load Option 
+const option = {
+  root:null,
+  threShold:0,
+  rootMargin:"0px 0px -500px 0px"
+}
+
+// Make Lazy Load 
+const imgObs = new IntersectionObserver(function(entries,observer){
+  entries.forEach(entre => {
+    if (entre.isIntersecting) {
+      const myImg = entre.target;
+
+      myImg.setAttribute("src", myImg.getAttribute("data-src"))
+    }
+  })
+}, option)
+
+imgsProductLazyLoad.forEach(img => {
+
+  imgObs.observe(img)
+})
+
+
+
 
 // function Show Details
 let productsInfo = document.querySelectorAll(".item .btn-warper i:first-child");
