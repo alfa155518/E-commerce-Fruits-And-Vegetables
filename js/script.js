@@ -34,31 +34,6 @@ function handelScroll() {
   });
 }
 
-// increase Number Of Service
-let serviceSection = document.querySelector(".service");
-
-let serviceItemNum = document.querySelectorAll(".service .item span p");
-
-let started = false;
-
-window.onscroll = function () {
-  if (window.scrollY >= serviceSection.offsetTop) {
-    if (!started) {
-      serviceItemNum.forEach((num) => count(num));
-    }
-    started = true;
-  }
-};
-
-function count(el) {
-  let goal = el.dataset.number;
-  let interval = setInterval(() => {
-    el.textContent++;
-    if (el.textContent === goal) {
-      clearInterval(interval);
-    }
-  }, 1000 / goal);
-}
 
 let linksProducts = document.querySelectorAll(".links-products li");
 
