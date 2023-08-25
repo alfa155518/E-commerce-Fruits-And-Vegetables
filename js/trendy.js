@@ -1,3 +1,17 @@
+// Make Line Scroller
+let lineScroller = document.querySelector(".scroller");
+
+let documentHeight =
+  document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+window.addEventListener("scroll", (e) => {
+  let documentScrollTop = document.documentElement.scrollTop;
+
+  lineScroller.style.width = `${(documentScrollTop / documentHeight) * 100}%`;
+});
+
+
+
 // Progress Bar Section
 
 let progressBar = document.querySelectorAll(

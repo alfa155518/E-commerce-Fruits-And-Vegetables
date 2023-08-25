@@ -496,6 +496,13 @@ header {
     -ms-transform: translate(-50%,-50%);
     -o-transform: translate(-50%,-50%);
 }
+
+@media (max-width:767px) {
+    .news-letter {
+        width: 80%;
+        margin: auto;
+    }
+}
 /* End News-Letter */
 
 
